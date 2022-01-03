@@ -1,0 +1,19 @@
+<component name="ProjectCodeStyleConfiguration">
+  <code_scheme name="Project" version="173">
+    <CssCodeStyleSettings>
+      <option name="VALUE_ALIGNMENT" value="1" />
+      <option name="KEEP_SINGLE_LINE_BLOCKS" value="true" />
+    </CssCodeStyleSettings>
+    <JSCodeStyleSettings version="0">
+      <option name="REFORMAT_C_STYLE_COMMENTS" value="true" />
+    </JSCodeStyleSettings>
+    <ScssCodeStyleSettings>
+      <option name="VALUE_ALIGNMENT" value="1" />
+      <option name="ENFORCE_QUOTES_ON_FORMAT" value="true" />
+    </ScssCodeStyleSettings>
+    <codeStyleSettings language="JavaScript">
+      <option name="RIGHT_MARGIN" value="200" />
+      <option name="KEEP_FIRST_COLUMN_COMMENT" value="false" />
+    </codeStyleSettings>
+  </code_scheme>
+</component>
