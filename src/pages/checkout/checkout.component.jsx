@@ -5,27 +5,28 @@ import {createStructuredSelector} from "reselect";
 import {selectCartItems, selectTotalPrice} from "../../redux/cart/cart.selectors";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 import StripeCheckoutButton from "../../components/stripe-button/stripe-button.component";
+import {CardBtn, CheckoutHeaderContainer, CheckoutPageContainer, HeaderBlockContainer, TotalContainer, WarningContainer} from "./checkout.styles";
 const CheckoutPage = ({cartItems, totalPrice}) => (
-    <div className='checkout-page'>
-        <div className="checkout-header">
-            <div className="header-block"><span>Product</span></div>
-            <div className="header-block"><span>Description</span></div>
-            <div className="header-block"><span>Quantity</span></div>
-            <div className="header-block"><span>Price</span></div>
-            <div className="header-block"><span>Remove</span></div>
-        </div>
+    <CheckoutPageContainer>
+        <CheckoutHeaderContainer>
+            <HeaderBlockContainer><span>Product</span></HeaderBlockContainer>
+            <HeaderBlockContainer><span>Description</span></HeaderBlockContainer>
+            <HeaderBlockContainer><span>Quantity</span></HeaderBlockContainer>
+            <HeaderBlockContainer><span>Price</span></HeaderBlockContainer>
+            <HeaderBlockContainer><span>Remove</span></HeaderBlockContainer>
+        </CheckoutHeaderContainer>
         {
             cartItems.map(cartItem=><CheckoutItem key={cartItem.id} cartItem={cartItem} />)
         }
-        <div className="total">
+        <TotalContainer>
             <span>TOTAL: ${totalPrice}</span>
-        </div>
-        <div className="test-warning">
-            *Please click on the following test <a className='card-btn' href="https://stripe.com/docs/testing#cards" target={'_blank'}>credit cards</a> for payments* <br/><br/>
+        </TotalContainer>
+        <WarningContainer>
+            *Please click on the following test <CardBtn href="https://stripe.com/docs/testing#cards" target={'_blank'}>credit Cards</CardBtn> for payments* <br/><br/>
             Or you can add random card number. It is just a test mode, so won't charge you.
-        </div>
+        </WarningContainer>
         <StripeCheckoutButton price={totalPrice}/>
-    </div>
+    </CheckoutPageContainer>
 );
 
 const mapStateToProps = createStructuredSelector({
