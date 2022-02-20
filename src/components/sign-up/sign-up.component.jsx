@@ -2,8 +2,9 @@ import React from 'react';
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 import './sign-up.styles.scss';
-import {auth, createUserProfileDocument} from "../../firebase/firebase.utils";
+import {connect} from "react-redux";
 import {SignInContainer, SignInTitle} from "../sign-in/sign-in.styles";
+import {signUpStart} from "../../redux/user/user.actions";
 
 class SignUp extends React.Component {
     constructor(props) {
@@ -15,20 +16,20 @@ class SignUp extends React.Component {
             confirmPassword: ''
         }
     }
-handleSubmit = async e =>{
+
+    handleSubmit = async e => {
         e.preventDefault();
-        const{displayName, email, password, confirmPassword} = this.state;
-        if(password!== confirmPassword){
+        const {signUpStart} = this.props;
+        const {displayName, email, password, confirmPassword} = this.state;
+        if (password !== confirmPassword) {
             alert('Password did not match');
         }
-        try{
-            const {user} = await auth.createUserWithEmailAndPassword(email, password);
-            await createUserProfileDocument(user, {displayName});
-            this.setState({displayName: '', email: '', password: '', confirmPassword: ''})
-        }catch (e) {
+        try {
+            signUpStart(displayName, email, password);
+        } catch (e) {
             console.log(e.message);
         }
-}
+    }
     handleChange = e => {
         let {name, value} = e.target;
         this.setState({[name]: value});
@@ -52,4 +53,8 @@ handleSubmit = async e =>{
     }
 }
 
-export default SignUp;
+const mapDispatchToProps = dispatch => ({
+    signUpStart: (displayName, email, password) => dispatch(signUpStart({displayName, email, password}))
+})
+
+export default connect(null, mapDispatchToProps)(SignUp);
